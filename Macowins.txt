@@ -1,0 +1,69 @@
+class Prenda{
+	int precio 	
+	Estado estadoPrenda
+	
+	abstract int precio(){}
+}
+
+class PrendaNueva inhertis Prenda{
+	
+	int precio(){
+	 return precio;
+	}
+}
+
+class PrendaPromocion inherits Prenda{
+	int descuentoUsuario
+	int precio(){
+	 return precio - descuentoUsuario
+	}
+
+}
+class PrendaLiquidacion inherits Prenda{
+	int precio(){
+	 return precio*0.5
+	}
+}
+
+class Venta{
+	List<Producto> listaDeProductos
+	int fecha
+
+	int ventaTotal(){
+	return listaDeProductos.sum(productos->producto.ventasProducto())
+	
+}
+
+class Producto{
+	int cantidadVendidas;
+	Prenda prenda;
+	Bool esTarjeta;
+	int cantCuotas;
+
+	int ventasProducto(){
+	if(esTarjeta)
+	return  ((prenda.precio() * cantidadVendidas)* 0.01 +
+       cantidadCuotas * coeficienteTarjeta)
+	}else {
+	return (prenda.precio() * cantidadVendidas)
+	}
+}
+
+
+class Macowins{
+
+	List <Venta> ventas
+
+	int gananciasTotales(){
+	return ventas.sum(venta->venta.ventaTotal())
+	}
+	
+	int gananciasUnaFecha(fecha){
+	return ventas.filter(venta->venta.esFecha(fecha)).sum(venta->venta.ventaTotal())
+	}
+	
+	
+}
+
+
+
